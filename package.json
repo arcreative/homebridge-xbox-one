@@ -1,0 +1,33 @@
+{
+  "name": "homebridge-xbox-one",
+  "version": "0.0.1",
+  "description": "Homebridge plugin to turn on Xbox One",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arcreative/homebridge-xbox-one.git"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge",
+    "xbox",
+    "one",
+    "xbox-one",
+    "xbone",
+    "WOL",
+    "wake on lan"
+  ],
+  "author": "Adam Robertson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arcreative/homebridge-xbox-one/issues"
+  },
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "homepage": "https://github.com/arcreative/homebridge-xbox-one#readme"
+}
