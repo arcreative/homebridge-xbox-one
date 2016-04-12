@@ -19,11 +19,14 @@ function XboxAccessory(log, config) {
 XboxAccessory.prototype = {
 
   setPowerState: function(powerOn, callback) {
+    var self = this;
     this.log("Sending on command to '" + this.name + "'...");
 
     // Queue tries times at tryInterval
     for (var i = 0; i < this.tries; i++) {
-      setTimeout(this.xbox.powerOn, i * this.tryInterval);
+      setTimeout(function() {
+        self.xbox.powerOn();
+      }, i * this.tryInterval);
     }
 
     // Don't really care about powerOn errors, and don't want more than one callback
