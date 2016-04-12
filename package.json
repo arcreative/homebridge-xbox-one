@@ -1,6 +1,6 @@
 {
   "name": "homebridge-xbox-one",
-  "version": "0.2.2",
+  "version": "0.2.1",
   "description": "Homebridge plugin to turn on Xbox One",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,6 @@
   },
   "homepage": "https://github.com/arcreative/homebridge-xbox-one#readme",
   "dependencies": {
-    "xbox-on": ">=0.0.5"
+    "xbox-on": "~0.0.5"
   }
 }
