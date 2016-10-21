@@ -13,12 +13,11 @@ function XboxAccessory(log, config) {
   this.log = log;
   this.name = config['name'] || 'Xbox';
   this.xbox = new Xbox(config['ipAddress'], config['liveId']);
-  this.ip = config['ipAddress'];
   this.tries = config['tries'] || 5;
   this.tryInterval = config['tryInterval'] || 1000;
 }
 
-XboxAccessory.prototype = {
+XboxAccessory.prototype = {  
 
   setPowerState: function(powerOn, callback) {
     var self = this;
@@ -35,6 +34,12 @@ XboxAccessory.prototype = {
     callback();
   },
 
+  getPowerState: function(callback) {
+    ping.sys.probe(this.xbox.ip, function(isAlive){
+      callback(null, isAlive);
+    });
+  },
+
   identify: function(callback) {
     this.log("Identify...");
     callback();
@@ -42,7 +47,6 @@ XboxAccessory.prototype = {
 
   getServices: function() {
     var switchService = new Service.Switch(this.name);
-    var ip = this.ip;
 
     switchService
       .getCharacteristic(Characteristic.On)
@@ -50,11 +54,7 @@ XboxAccessory.prototype = {
 
     switchService
       .getCharacteristic(Characteristic.On)
-      .on('get', function(callback) {
-        ping.sys.probe(ip, function(isAlive){
-          callback(null, isAlive);
-        });
-      });
+      .on('get', this.getPowerState.bind(this));
 
     return [switchService];
   }
