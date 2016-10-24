@@ -17,7 +17,7 @@ function XboxAccessory(log, config) {
   this.tryInterval = config['tryInterval'] || 1000;
 }
 
-XboxAccessory.prototype = {  
+XboxAccessory.prototype = 
 
   setPowerState: function(powerOn, callback) {
     var self = this;
