@@ -1,4 +1,5 @@
 var Xbox = require('xbox-on');
+var ping = require('ping');
 
 var Service, Characteristic;
 
@@ -33,6 +34,12 @@ XboxAccessory.prototype = {
     callback();
   },
 
+  getPowerState: function(callback) {
+    ping.sys.probe(this.xbox.ip, function(isAlive){
+      callback(null, isAlive);
+    });
+  },
+
   identify: function(callback) {
     this.log("Identify...");
     callback();
@@ -44,6 +51,10 @@ XboxAccessory.prototype = {
     switchService
       .getCharacteristic(Characteristic.On)
       .on('set', this.setPowerState.bind(this));
+
+    switchService
+      .getCharacteristic(Characteristic.On)
+      .on('get', this.getPowerState.bind(this));
 
     return [switchService];
   }
