@@ -21,6 +21,16 @@ Add this to your `~/.homebridge/config.json` as an accessory:
 }
 ```
 
+## Optional configuration
+
+You can additionally configure the following options as well, defaults are shown
+
+```
+  "tries": 5,               // Number of times to send powerOn request
+  "tryInterval": 1000,      // Delay between tries
+  "waitForLastTry": false,  // Wait for last try to trigger callback (less responsive)
+```
+
 ## Getting your Xbox One's IP address
 
 On your Xbox, go to Settings > Network > Network Settings > Advanced Settings

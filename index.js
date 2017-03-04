@@ -7,7 +7,7 @@ module.exports = function(homebridge){
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   homebridge.registerAccessory("homebridge-xbox-one", "Xbox", XboxAccessory);
-}
+};
 
 function XboxAccessory(log, config) {
   this.log = log;
@@ -15,23 +15,20 @@ function XboxAccessory(log, config) {
   this.xbox = new Xbox(config['ipAddress'], config['liveId']);
   this.tries = config['tries'] || 5;
   this.tryInterval = config['tryInterval'] || 1000;
+  this.waitForLastTry = config['waitForLastTry'] || false;
 }
 
 XboxAccessory.prototype = {
 
   setPowerState: function(powerOn, callback) {
-    var self = this;
     this.log("Sending on command to '" + this.name + "'...");
 
     // Queue tries times at tryInterval
-    for (var i = 0; i < this.tries; i++) {
-      setTimeout(function() {
-        self.xbox.powerOn();
-      }, i * this.tryInterval);
-    }
-
-    // Don't really care about powerOn errors, and don't want more than one callback
-    callback();
+    xbox.powerOn({
+      tries: this.tries,
+      delay: this.tryInterval,
+      waitForCallback: this.waitForLastTry
+    }, callback);
   },
 
   getPowerState: function(callback) {
