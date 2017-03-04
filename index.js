@@ -24,7 +24,7 @@ XboxAccessory.prototype = {
     this.log("Sending on command to '" + this.name + "'...");
 
     // Queue tries times at tryInterval
-    xbox.powerOn({
+    this.xbox.powerOn({
       tries: this.tries,
       delay: this.tryInterval,
       waitForCallback: this.waitForLastTry
